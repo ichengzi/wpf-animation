@@ -5,8 +5,168 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp3"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" Height="700" Width="800">
+    <StackPanel>
+        <TextBlock
+          Name="MyWipedText"
+          Margin="20" 
+          Width="480" Height="100" FontSize="48" FontWeight="Bold" Foreground="Maroon">
+          This is wiped text
+
+  <!-- Animates the text block's width. -->
+            <TextBlock.Triggers>
+                <EventTrigger RoutedEvent="TextBlock.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+            Storyboard.TargetName="MyWipedText" 
+            Storyboard.TargetProperty="(TextBlock.Width)"
+            To="0.0" Duration="0:0:10" 
+            AutoReverse="True" RepeatBehavior="Forever" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </TextBlock.Triggers>
+        </TextBlock>
+
+        <TextBlock
+          Name="MyFadingText"
+          Margin="20" 
+          Width="640" Height="100" FontSize="48" FontWeight="Bold" Foreground="Maroon">
+          This is fading text
+
+  <!-- Animates the text block's opacity. -->
+            <TextBlock.Triggers>
+                <EventTrigger RoutedEvent="TextBlock.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetName="MyFadingText" 
+                                Storyboard.TargetProperty="(TextBlock.Opacity)"
+                                From="1.0" To="0.0" Duration="0:0:5" 
+                                AutoReverse="True" RepeatBehavior="Forever" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </TextBlock.Triggers>
+        </TextBlock>
+
+        <TextBlock
+  Name="MyChangingColorText"
+  Margin="20" 
+  Width="640" Height="100" FontSize="48" FontWeight="Bold">
+  This is changing color text
+            <TextBlock.Foreground>
+                <SolidColorBrush x:Name="MySolidColorBrush" Color="Maroon" />
+            </TextBlock.Foreground>
+
+  <!-- Animates the text block's color. -->
+            <TextBlock.Triggers>
+                <EventTrigger RoutedEvent="TextBlock.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation 
+            Storyboard.TargetName="MySolidColorBrush"
+            Storyboard.TargetProperty="Color"
+            From="DarkOrange" To="SteelBlue" Duration="0:0:5"
+            AutoReverse="True" RepeatBehavior="Forever" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </TextBlock.Triggers>
+        </TextBlock>
+
+        <TextBlock
+  Name="MyRotatingText"
+  Margin="20" 
+  Width="640" Height="100" FontSize="48" FontWeight="Bold" Foreground="Teal" 
+  >
+  This is rotating text
+            <TextBlock.RenderTransform>
+                <RotateTransform x:Name="MyRotateTransform" Angle="0" CenterX="230" CenterY="25"/>
+            </TextBlock.RenderTransform>
+
+  <!-- Animates the text block's rotation. -->
+            <TextBlock.Triggers>
+                <EventTrigger RoutedEvent="TextBlock.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+            Storyboard.TargetName="MyRotateTransform" 
+            Storyboard.TargetProperty="(RotateTransform.Angle)"
+            From="0.0" To="360" Duration="0:0:10" 
+            RepeatBehavior="Forever" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </TextBlock.Triggers>
+        </TextBlock>
+
+        <TextBlock Background="Yellow" Text="Hello world">
+            <TextBlock.Triggers>
+                <EventTrigger RoutedEvent="TextBlock.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard >
+                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" BeginTime="00:00:00" 
+                                                              AutoReverse="True" RepeatBehavior="Forever">
+                                <SplineThicknessKeyFrame KeyTime="00:00:00" Value="134, 0,0,0" />
+                                <SplineThicknessKeyFrame KeyTime="00:00:03" Value="50, 0,0,0" />
+                            </ThicknessAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </TextBlock.Triggers>
+        </TextBlock>
+        <TextBlock Background="Green" Text="Hello world">
+            <TextBlock.Triggers>
+                <EventTrigger RoutedEvent="TextBlock.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard >
+                            <ThicknessAnimation Storyboard.TargetProperty="Margin" 
+                                                Duration="0:0:3"
+                                                From="134, 0,0,0"
+                                                To="50, 0,0,0"
+                                                AutoReverse="True" 
+                                                RepeatBehavior="Forever">
+                            </ThicknessAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </TextBlock.Triggers>
+        </TextBlock>
+
+        <Button Name="myAnimatedButton" Margin="0"
+                    FontSize="16pt" FontFamily="Verdana">Some Text
+            <Button.Triggers>
+                <EventTrigger RoutedEvent="Button.Click">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <StringAnimationUsingKeyFrames 
+                Storyboard.TargetName="myAnimatedButton" Storyboard.TargetProperty="(Button.Content)"
+                Duration="0:0:8" FillBehavior="HoldEnd">
+
+                                <!-- All the key frames below are DiscreteStringKeyFrames. Discrete key frames create 
+                sudden "jumps" between values (no interpolation). Only discrete key frames can be used 
+                for String key frame animations. -->
+                                <DiscreteStringKeyFrame Value="" KeyTime="0:0:0" />
+                                <DiscreteStringKeyFrame Value="A" KeyTime="0:0:1" />
+                                <DiscreteStringKeyFrame Value="An" KeyTime="0:0:1.5" />
+                                <DiscreteStringKeyFrame Value="Ani" KeyTime="0:0:2" />
+                                <DiscreteStringKeyFrame Value="Anim" KeyTime="0:0:2.5" />
+                                <DiscreteStringKeyFrame Value="Anima" KeyTime="0:0:3" />
+                                <DiscreteStringKeyFrame Value="Animat" KeyTime="0:0:3.5" />
+                                <DiscreteStringKeyFrame Value="Animate" KeyTime="0:0:4" />
+                                <DiscreteStringKeyFrame Value="Animated" KeyTime="0:0:4.5" />
+                                <DiscreteStringKeyFrame Value="Animated " KeyTime="0:0:5" />
+                                <DiscreteStringKeyFrame Value="Animated T" KeyTime="0:0:5.5" />
+                                <DiscreteStringKeyFrame Value="Animated Te" KeyTime="0:0:6" />
+                                <DiscreteStringKeyFrame Value="Animated Tex" KeyTime="0:0:6.5" />
+                                <DiscreteStringKeyFrame Value="Animated Text" KeyTime="0:0:7" />
+                            </StringAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Button.Triggers>
+        </Button>
+    </StackPanel>
 </Window>
